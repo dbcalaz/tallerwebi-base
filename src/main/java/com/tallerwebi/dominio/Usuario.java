@@ -1,9 +1,6 @@
 package com.tallerwebi.dominio;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +15,8 @@ public class Usuario {
     private String rol;
     private Boolean activo = false;
 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Publicacion> publicaciones = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -59,6 +58,11 @@ public class Usuario {
     }
 
 
+    public List<Publicacion> getPublicaciones() {
+        return publicaciones;
+    }
 
-
+    public void setPublicaciones(List<Publicacion> publicaciones) {
+        this.publicaciones = publicaciones;
+    }
 }
